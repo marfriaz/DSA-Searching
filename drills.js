@@ -1,19 +1,20 @@
 "use strict";
+const BinarySearchTree = require("./BinarySearchTree");
 
 //=== 1. How many searches? ===//
 
 // Given a sorted list 3, 5, 6, 8, 11, 12, 14, 15, 17, 18 and using the recursive binary search algorithm,
 // identify the sequence of numbers that each recursive call will search to try and find 8.
 
-// look for the midle of the array
+// look for the midle of the array (0 +10/2 = 5 = index)
 // returns 12
-// 8<12 so will look through lower half.
+// 8<12 so will look through lower half (end = index-1 = 4).
 
-// 3,5,6,8,11 find middle point again
+// 3,5,6,8,11 find middle point again (0+4=2 = index)
 // returns 6
-// 8>6 so will look in upper half
+// 8>6 so will look in upper half (start = index+1 = 3)
 
-// 8,11 find midpoint.
+// 8,11 find midpoint. (start =3, end = 4 ==> 7/2 = 3 = index)
 // no mid point so returns higher???
 // returns 11
 // 8<11
@@ -51,20 +52,30 @@ function deweySearching(dewey, title, start, end) {
 }
 console.log(deweySearching(["be", "he", "hi"], "hi"));
 
+//=== 5. Implement different tree traversals ===//
+
+// Using your BinarySearchTree class from your previous lesson, create a binary search
+// tree with the following dataset: 25 15 50 10 24 35 70 4 12 18 31 44 66 90 22.
+// Then implement inOrder(), preOrder(), and postOrder() functions. Test your functions with the following datasets.
+// A pre-order traversal should give you the following order: 25, 15, 10, 4, 12, 24, 18, 22, 50, 35, 31, 44, 70, 66, 90
+// In-order: 4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90
+// Post-order: 4, 12, 10, 22, 18, 24, 15, 31, 44, 35, 66, 90, 70, 50, 25
+
+function main() {
+  const BST = new BinarySearchTree();
+  const data = [25, 15, 50, 10, 24, 35, 70, 4, 12, 18, 31, 44, 66, 90, 22];
+  data.forEach((value) => BST.insert(value));
+  console.log(BST.inOrder());
+  console.log(BST.preOrder());
+  console.log(BST.postOrder());
+}
+// main();
+
 //=== 7. Max profit ===//
 
 // The share price for a company over a week's trading is as follows: [128, 97, 121, 123, 98, 97, 105].
 // If you had to buy shares in the company on a particular day, and sell the shares on a subsequent day,
 // write an algorithm to work out what the maximum profit you could make would be.
-
-const SHARE_PRICES = [128, 97, 121, 123, 98, 97, 105];
-
-/**
- * The share price for a company over a week's trading is as follows:
- *  [128, 97, 121, 123, 98, 97, 105]. If you had to buy shares in the
- *  company on a particular day, and sell the shares on a following day,
- *  write an algorithm to work out what the maximum profit you could make would be.
- */
 
 function maxProfits(arr) {
   //take in an array, return max profit
@@ -91,6 +102,7 @@ function maxProfits(arr) {
   return currMaxProfit;
 }
 
+const SHARE_PRICES = [128, 97, 121, 123, 98, 97, 105];
 console.log(maxProfits(SHARE_PRICES));
 
 //=== 8. Egg drop ===//

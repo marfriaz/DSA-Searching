@@ -4,6 +4,8 @@ const Queue = require("./queue");
 
 //=== 6. Find the next commanding officer ===//
 
+// Breadth-first search!!!!!!!!! Works across rows of a tree
+
 // Suppose you have a tree representing a command structure of the Starship USS Enterprise.
 //                Captain Picard
 //              /                \
@@ -25,16 +27,22 @@ const Queue = require("./queue");
 
 function bfs(tree, values = []) {
   const queue = new Queue();
-  const node = tree;
+  const node = tree.root;
   queue.enqueue(node);
   while (queue.first) {
     const node = queue.dequeue();
+    // remove from the queue
+
     values.push(node.value);
+    // add that value from the queue to an array
+
     if (node.left) {
       queue.enqueue(node.left);
+      //add left child to the queue
     }
     if (node.right) {
       queue.enqueue(node.right);
+      // add right child to the queue
     }
   }
   return values;
